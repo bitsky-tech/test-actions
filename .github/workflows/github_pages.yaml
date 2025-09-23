@@ -1,0 +1,95 @@
+# GitHub Pages 自动部署工作流
+# 此工作流使用 uv 进行 Python 依赖管理，并自动构建和部署 MkDocs 文档到 GitHub Pages
+# 参考文档：
+# - GitHub Actions: https://docs.github.com/en/actions
+# - uv 包管理器: https://docs.astral.sh/uv/
+# - MkDocs: https://www.mkdocs.org/
+# - GitHub Pages: https://docs.github.com/en/pages
+
+name: GitHub Pages
+
+# 触发条件：当推送到 main 分支或创建 Pull Request 时运行
+on:
+  push:
+    branches:
+      - main  # 只有推送到 main 分支才会触发部署
+  pull_request:  # PR 时只构建，不部署
+
+jobs:
+  deploy:
+    # 使用 Ubuntu 22.04 作为运行环境
+    runs-on: ubuntu-22.04
+    
+    # 设置权限：需要写入权限来部署到 GitHub Pages
+    permissions:
+      contents: write  # 允许写入仓库内容
+      pages: write     # 允许写入 Pages
+      id-token: write  # 允许写入 ID token（用于身份验证）
+    
+    # 并发控制：确保同一分支的多个工作流不会同时运行
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true  # 取消正在运行的相同工作流
+    
+    steps:
+      # 步骤 1: 检出代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 获取完整历史记录，某些工具可能需要
+
+      # 步骤 2: 设置 Python 环境
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'  # 与 pyproject.toml 中的要求保持一致
+
+      # 步骤 3: 安装 uv 包管理器
+      # uv 是一个极快的 Python 包管理器，用 Rust 编写
+      # 相比 pip，uv 在依赖解析和安装速度上有显著优势
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"  # 使用最新版本的 uv
+          enable-cache: true  # 启用缓存以加速后续构建
+
+      # 步骤 4: 缓存 uv 依赖
+      # 缓存可以显著减少构建时间，特别是对于大型项目
+      - name: Cache uv dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/uv
+            .venv
+          key: ${{ runner.os }}-uv-${{ hashFiles('**/uv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-uv-
+
+      # 步骤 5: 安装项目依赖
+      # 使用 uv 安装 pyproject.toml 中定义的依赖
+      # uv 会自动处理依赖解析和虚拟环境管理
+      - name: Install dependencies with uv
+        run: |
+          cd docs  # 进入 docs 目录，因为 pyproject.toml 和 uv.lock 在此目录
+          uv sync  # 同步依赖，相当于 pip install + 虚拟环境管理
+
+      # 步骤 6: 构建 MkDocs 文档
+      # 使用 uv 运行 mkdocs 命令来构建静态网站
+      - name: Build MkDocs site
+        run: |
+          cd docs
+          uv run python -m mkdocs build  # 使用 uv 运行 mkdocs build 命令
+          # 验证构建产物
+          ls -la site/
+          du -sh site/
+
+      # 步骤 7: 部署到 GitHub Pages
+      # 使用 peaceiris/actions-gh-pages 进行部署，这是一个更稳定的选择
+      # 只有在推送到 main 分支时才执行部署
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main'  # 只在 main 分支部署
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub token
+          publish_dir: ./docs/site  # MkDocs 构建输出的目录
+          cname: cicd.bridgic.ai # 如果有自定义域名，在这里设置
