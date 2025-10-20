@@ -28,6 +28,7 @@ build-doc-version: require-version
 
 # Delete a deployed docs version
 delete-doc-version: require-version
+	@make gen-mkdocs-yml
 	@uv run mike delete --push $(VERSION)
 
 # Start development server
