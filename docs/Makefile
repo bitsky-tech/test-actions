@@ -26,6 +26,10 @@ build-doc-version: require-version
 	@uv run mike deploy --push --update-aliases $(VERSION) latest
 	@uv run mike set-default --push latest
 
+# Delete a deployed docs version
+delete-doc-version: require-version
+	@uv run mike delete --push $(VERSION)
+
 # Start development server
 serve-doc:
 	@uv sync
