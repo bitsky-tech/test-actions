@@ -8,13 +8,23 @@ MKDOCS = uv run mkdocs
 
 # Generate mkdocs.yml file from API reference documentation
 gen-mkdocs-yml:
-	@echo "Generating mkdocs.yml file from API reference documentation..."
+	@uv run python scripts/gen_mkdocs_yml.py
 
 # Build static site
 build-doc:
 	@uv sync
 	@make gen-mkdocs-yml
 	$(MKDOCS) build
+
+require-version:
+	@if [ -z "$(VERSION)" ]; then \
+		echo "ERROR: VERSION is required. Usage: make build-doc-version VERSION=1.2.3"; \
+		exit 1; \
+	fi
+
+build-doc-version: require-version
+	@uv run mike deploy --push --update-aliases $(VERSION) latest
+	@uv run mike set-default --push latest
 
 # Start development server
 serve-doc:
