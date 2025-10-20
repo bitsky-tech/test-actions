@@ -57,3 +57,17 @@ jobs:
           cd docs
           make delete-doc-version VERSION=${{ github.event.ref }}
 
+      - name: Re-point latest alias to highest remaining tag (if any)
+        run: |
+          set -e
+          # Find highest remaining v* tag after deletion
+          REMAINING_TAG=$(git tag -l 'v*' | sort -V | tail -n 1)
+          if [ -z "$REMAINING_TAG" ]; then
+            echo "No remaining version tags; skipping latest alias update"
+            exit 0
+          fi
+          echo "Re-pointing latest to ${REMAINING_TAG}"
+          cd docs
+          uv run mike alias --push --update "$REMAINING_TAG" latest
+          uv run mike set-default --push latest
+
