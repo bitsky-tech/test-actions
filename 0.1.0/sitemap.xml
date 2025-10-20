@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://docs.bridgic.ai/0.1.0/</loc>
+         <lastmod>2025-10-20</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.bridgic.ai/0.1.0/about/</loc>
+         <lastmod>2025-10-20</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.bridgic.ai/0.1.0/mkdocs_optimization/</loc>
+         <lastmod>2025-10-20</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.bridgic.ai/0.1.0/reference/bridgic-core/bridgic/core/</loc>
+         <lastmod>2025-10-20</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.bridgic.ai/0.1.0/reference/bridgic-core/bridgic/core/agentic/</loc>
+         <lastmod>2025-10-20</lastmod>
+    </url>
+</urlset>
