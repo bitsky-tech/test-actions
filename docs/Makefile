@@ -4,34 +4,23 @@
 HOST ?= 127.0.0.1
 PORT ?= 8000
 
-# Command wrapper
 MKDOCS = uv run mkdocs
 
-# Common MkDocs commands
-
-# Install dependencies
-install:
-	uv sync
-
-# Start development server
-serve:
-	$(MKDOCS) serve -a $(HOST):$(PORT)
+# Generate mkdocs.yml file from API reference documentation
+gen-mkdocs-yml:
+	@echo "Generating mkdocs.yml file from API reference documentation..."
 
 # Build static site
-build:
+build-doc:
+	@uv sync
+	@make gen-mkdocs-yml
 	$(MKDOCS) build
 
-# Validate configuration
-check:
-	$(MKDOCS) build --strict
-
-# Show help
-help:
-	$(MKDOCS) --help
-
-# Show version
-version:
-	$(MKDOCS) --version
+# Start development server
+serve-doc:
+	@uv sync
+	@make gen-mkdocs-yml
+	$(MKDOCS) serve -a $(HOST):$(PORT)
 
 # Clean build artifacts
 clean:
