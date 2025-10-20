@@ -5,6 +5,7 @@ HOST ?= 127.0.0.1
 PORT ?= 8000
 
 MKDOCS = uv run mkdocs
+MIKE = uv run mike
 
 # Generate mkdocs.yml file from API reference documentation
 gen-mkdocs-yml:
@@ -23,19 +24,19 @@ require-version:
 	fi
 
 build-doc-version: require-version
-	@uv run mike deploy --push --update-aliases $(VERSION) latest
-	@uv run mike set-default --push latest
+	$(MIKE) deploy --push --update-aliases $(VERSION) latest
+	$(MIKE) set-default --push latest
 
 # Delete a deployed docs version
 delete-doc-version: require-version
 	@make gen-mkdocs-yml
-	@uv run mike delete --push $(VERSION)
+	$(MIKE) delete --push $(VERSION)
 
 # Start development server
 serve-doc:
 	@uv sync
 	@make gen-mkdocs-yml
-	$(MKDOCS) serve -a $(HOST):$(PORT)
+	$(MIKE) serve -a $(HOST):$(PORT)
 
 # Clean build artifacts
 clean:
