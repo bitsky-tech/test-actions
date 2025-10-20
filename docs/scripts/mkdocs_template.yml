@@ -16,6 +16,7 @@ theme:
   name: material
   logo: assets/logo.png
   favicon: assets/favicon.ico
+  custom_dir: overrides
   features:
     # Navigation
     # navigation.instant enables client-side navigation for faster page transitions.
