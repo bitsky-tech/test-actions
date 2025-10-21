@@ -18,19 +18,19 @@ build-doc:
 	$(MKDOCS) build
 
 require-version:
-	@if [ -z "$(VERSION)" ]; then \
-		echo "ERROR: VERSION is required. Usage: make build-doc-version VERSION=1.2.3"; \
+	@if [ -z "$(version)" ]; then \
+		echo "ERROR: version is required. Usage: make build-doc-version version=1.2.3"; \
 		exit 1; \
 	fi
 
 build-doc-version: require-version
-	$(MIKE) deploy --push --update-aliases $(VERSION) latest
+	$(MIKE) deploy --push --update-aliases $(version) latest
 	$(MIKE) set-default --push latest
 
 # Delete a deployed docs version
 delete-doc-version: require-version
 	@make gen-mkdocs-yml
-	$(MIKE) delete --push $(VERSION)
+	$(MIKE) delete --push $(version)
 
 # Start development server
 serve-doc:
