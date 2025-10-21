@@ -50,7 +50,7 @@ jobs:
         uses: astral-sh/setup-uv@v4
         with:
           version: "latest"  # Use the latest version of uv
-          enable-cache: true  # Enable caching to speed up subsequent builds
+          enable-cache: false  # Disable built-in cache to avoid conflicts with multiple uv.lock files
 
       # Step 4: Cache uv dependencies
       # Caching can significantly reduce build time, especially for large projects
@@ -59,9 +59,10 @@ jobs:
         with:
           path: |
             ~/.cache/uv
-            .venv
-          key: ${{ runner.os }}-uv-${{ hashFiles('**/uv.lock') }}
+            docs/.venv
+          key: ${{ runner.os }}-docs-uv-${{ hashFiles('docs/uv.lock') }}-${{ hashFiles('docs/pyproject.toml') }}
           restore-keys: |
+            ${{ runner.os }}-docs-uv-
             ${{ runner.os }}-uv-
 
       # Step 5: Install dependencies and configure Git
@@ -78,7 +79,7 @@ jobs:
           cd docs
           make build-doc-version version=${{ github.ref_name }}
       
-      # Step 8: Ensure CNAME exists on gh-pages branch
+      # Step 7: Ensure CNAME exists on gh-pages branch
       - name: Ensure CNAME on gh-pages
         run: |
           set -e
