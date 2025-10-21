@@ -84,7 +84,7 @@ jobs:
         run: |
           set -e
           # Find highest remaining v* tag after deletion
-          REMAINING_TAG=$(git tag -l 'v*' | sort -V | tail -n 1)
+          REMAINING_TAG=$(uv run mike list | sort -V | tail -n 1)
           if [ -z "$REMAINING_TAG" ]; then
             echo "No remaining version tags; skipping latest alias update"
             exit 0
