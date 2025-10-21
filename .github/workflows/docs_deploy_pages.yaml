@@ -1,4 +1,4 @@
-# GitHub Pages Auto-Deployment Workflow
+# Docs Deploy Pages Workflow
 # This workflow uses uv for Python dependency management and automatically builds and deploys MkDocs documentation to GitHub Pages
 # Reference documentation:
 # - GitHub Actions: https://docs.github.com/en/actions
@@ -6,13 +6,13 @@
 # - MkDocs: https://www.mkdocs.org/
 # - GitHub Pages: https://docs.github.com/en/pages
 
-name: GitHub Pages
+name: Docs Deploy Pages
 
-# Trigger conditions: runs when pushing to main branch or creating Pull Request
+# Trigger conditions: runs when pushing to a tag
 on:
   push:
     tags:
-      - v*  # Only triggers deployment when pushing to main branch
+      - v*  # Only triggers deployment when pushing to a tag
 
 jobs:
   deploy:
@@ -76,8 +76,6 @@ jobs:
       - name: Build and deploy docs with mike
         run: |
           cd docs
-          # Generate mkdocs.yml, then let mike handle building & deployment
-          make gen-mkdocs-yml
           make build-doc-version version=${{ github.ref_name }}
       
       # Step 8: Ensure CNAME exists on gh-pages branch
