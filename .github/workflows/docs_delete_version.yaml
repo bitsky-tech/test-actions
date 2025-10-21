@@ -42,20 +42,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-uv-
 
-      - name: Install dependencies with uv
+      - name: Install dependencies and configure Git
         run: |
           cd docs
           uv sync
-
-      - name: Configure Git
-        run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Delete docs version with mike
         run: |
           cd docs
-          make delete-doc-version VERSION=${{ github.event.ref }}
+          make delete-doc-version version=${{ github.event.ref }}
 
       - name: Re-point latest alias to highest remaining tag (if any)
         run: |

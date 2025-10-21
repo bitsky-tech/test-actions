@@ -23,11 +23,12 @@ require-version:
 		exit 1; \
 	fi
 
+# build a specific version of the docs and point the latest alias to it
 build-doc-version: require-version
 	$(MIKE) deploy --push --update-aliases $(version) latest
 	$(MIKE) set-default --push latest
 
-# Delete a deployed docs version
+# Delete a deployed docs version and point the latest alias to the next highest version
 delete-doc-version: require-version
 	@make gen-mkdocs-yml
 	$(MIKE) delete --push $(version)
