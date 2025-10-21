@@ -76,6 +76,8 @@ jobs:
       - name: Build and deploy docs with mike
         run: |
           cd docs
+          # Generate mkdocs.yml, then let mike handle building & deployment
+          make gen-mkdocs-yml
           make build-doc-version version=${{ github.ref_name }}
       
       # Step 8: Ensure CNAME exists on gh-pages branch
