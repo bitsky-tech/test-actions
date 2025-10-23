@@ -7,7 +7,9 @@ edit_uri: edit/main/docs/docs/
 
 nav:
   - Home: index.md
-  - Test Add Page: test_add_page.md
+  - Test Page:
+    - Test Add Page: test_add_page.md
+    - Test IPynb: test_ipynb.ipynb
   - About: about.md
   - MkDocs 优化说明: mkdocs_optimization.md
   - API Reference:
