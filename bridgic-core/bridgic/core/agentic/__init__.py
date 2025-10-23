@@ -6,8 +6,13 @@ LLM-based intelligent agent workflows. These Automa implementations are typicall
 composed together to build complex intelligent agents with advanced capabilities.
 """
 
-from ._concurrent_automa import ConcurrentAutoma
+from ._concurrent_automa import ConcurrentAutoma, ConcurrentAutomaV1, ConcurrentAutomaV2, ConcurrentAutomaV3, ConcurrentAutomaV4, ConcurrentAutomaV5
 
 __all__ = [
     "ConcurrentAutoma", 
+    "ConcurrentAutomaV1",
+    "ConcurrentAutomaV2",
+    "ConcurrentAutomaV3",
+    "ConcurrentAutomaV4",
+    "ConcurrentAutomaV5",
 ]
