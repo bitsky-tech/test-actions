@@ -81,8 +81,8 @@ jobs:
         run: |
           cd docs
           version=$(echo ${{ github.ref_name }} | sed 's/patch-doc-//')
-          make delete-doc-version version=${version}
-          make build-doc-version version=${version}
+          make delete-doc-version version=${{version}}
+          make build-doc-version version=${{version}}
       
       # Step 7: Ensure CNAME exists on gh-pages branch
       - name: Ensure CNAME on gh-pages
