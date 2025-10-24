@@ -91,6 +91,5 @@ jobs:
           fi
           echo "Re-pointing latest to ${REMAINING_TAG}"
           cd docs
-          uv run mike alias --push --update "$REMAINING_TAG" latest
-          uv run mike set-default --push latest
+          make build-doc-version version=$REMAINING_TAG
 
