@@ -1,26 +1,36 @@
 site_name: Bridgic
 site_description: Bridge logic and magic together with autonomous AI capabilities
-site_url: http://cicd.bridgic.ai/
+site_url: https://cicd.bridgic.ai
 repo_url: https://github.com/bitsky-tech/test-actions
 repo_name: bitsky-tech/test-actions
 edit_uri: edit/main/docs/docs/
 
 nav:
   - Home: index.md
+  - Test Page:
+    - Test Add Page: test_add_page.md
+    - Test IPynb: test_ipynb.ipynb
   - About: about.md
   - MkDocs 优化说明: mkdocs_optimization.md
+  - API Reference:
+{{API_REFERENCE_CONTENT}}
 
 theme: 
   name: material
   logo: assets/logo.png
   favicon: assets/favicon.ico
+  custom_dir: overrides
   features:
     # Navigation
+    # navigation.instant enables client-side navigation for faster page transitions.
     - navigation.instant
+    # navigation.instant.prefetch preloads likely next pages to reduce perceived latency.
     - navigation.instant.prefetch
-    - navigation.prune
+    # navigation.instant.progress shows a top progress bar on page loads (user feedback).
+    - navigation.instant.progress
+    # - navigation.prune  # Keep disabled for now; pruning reduces DOM for huge pages but may complicate anchors.
     - navigation.tabs
-    - navigation.tabs.sticky
+    # - navigation.tabs.sticky
     - navigation.indexes
     - navigation.top
     - navigation.footer
@@ -28,7 +38,6 @@ theme:
     - navigation.tracking
     # Table of contents
     - toc.follow
-    - toc.integrate
     # Search
     - search.suggest
     - search.highlight
@@ -39,8 +48,8 @@ theme:
     - content.code.annotate
     - content.tabs.link
     - content.tooltips
-    - content.action.edit
-    - content.action.view
+    # - content.action.edit
+    # - content.action.view
   palette:
     # Automatic mode
     - media: "(prefers-color-scheme)"
@@ -50,22 +59,22 @@ theme:
     # Light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
-      accent: purple
+      primary: white
+      accent: gray
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
     # Dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: black
-      accent: purple
+      primary: grey
+      accent: white
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
   font:
-    text: Roboto
-    code: Roboto Mono
+    text: "Public Sans"
+    code: "Roboto Mono"
   icon:
     logo: material/bridge
     repo: fontawesome/brands/github
@@ -73,23 +82,30 @@ theme:
     view: material/eye
 plugins: 
   - search:
+      # Improved word boundary detection for camelCase and symbols in search.
       separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
   - autorefs
-  - git-revision-date-localized:
-      enable_creation_date: true
-      type: timeago
-      fallback_to_build_date: true
-  - git-committers:
-      repository: bitsky-tech/bridgic
-      branch: main
-      enabled: !ENV [ENABLE_GIT_COMMITTERS, false]
+  # Minify keeps output small and snappy.
+  # - git-revision-date-localized:
+  #     enable_creation_date: true
+  #     type: timeago
+  #     fallback_to_build_date: true
+  # - git-committers:
+  #     repository: bitsky-tech/bridgic
+  #     branch: main
+  #     enabled: !ENV [ENABLE_GIT_COMMITTERS, false]
   - minify:
       minify_html: true
       minify_js: true
       minify_css: true
       htmlmin_opts:
         remove_comments: true
+  - mkdocs-jupyter:
+      execute: false
+      include_source: true
+      highlight_extra_classes: jupyter-code-cell
   - mkdocstrings:
+      custom_templates: templates
       handlers:
         python:
           options:
@@ -103,14 +119,24 @@ plugins:
               - "!^__init__"
             members_order: source
             merge_init_into_class: false
+            summary: false
+            inherited_members: false
+            show_bases: true
+            show_signature: true
+            line_length: 60
+            docstring_section_style: table
+            heading_level: 2
             separate_signature: true
-            show_root_full_path: true
+            show_root_full_path: false
             show_root_heading: false
             show_root_toc_entry: false
             show_signature_annotations: true
             signature_crossrefs: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
           paths: 
             - ../bridgic-core
+  - mike
 
 markdown_extensions:
   # Python Markdown
@@ -120,9 +146,10 @@ markdown_extensions:
   - def_list
   - footnotes
   - md_in_html
+  # Table of contents with link icons for easy sharing
   - toc:
       permalink: true
-      title: On this page
+      title: Outline
   # Python Markdown Extensions
   - pymdownx.arithmatex:
       generic: true
@@ -130,19 +157,23 @@ markdown_extensions:
       smart_enable: all
   - pymdownx.caret
   - pymdownx.details
+  # Auto-link plain issue/PR/user references using repo context (improves readability)
+  - pymdownx.magiclink:
+      normalize_issue_symbols: true
+      repo_url_shorthand: true
+      user: bitsky-tech
+      repo: test-actions
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.highlight:
+      # Show line numbers by default; can be overridden per block with {linenums="0"}
+      linenums: true
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.keys
-  - pymdownx.magiclink:
-      repo_url_shorthand: true
-      user: bitsky-tech
-      repo: bridgic
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.snippets:
@@ -159,20 +190,33 @@ markdown_extensions:
   - pymdownx.tilde
 
 extra:
-  analytics:
-    provider: google
-    property: !ENV GOOGLE_ANALYTICS_KEY
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/bitsky-tech/bridgic
-    - icon: fontawesome/brands/python
-      link: https://pypi.org/project/bridgic/
-    - icon: fontawesome/brands/discord
-      link: https://discord.gg/bridgic
+  # analytics:
+  #   provider: google
+  #   property: !ENV GOOGLE_ANALYTICS_KEY
+  # social:
+  #   - icon: fontawesome/brands/github
+  #     link: https://github.com/bitsky-tech/bridgic
+    # - icon: fontawesome/brands/python
+    #   link: https://pypi.org/project/bridgic/
+    # - icon: fontawesome/brands/discord
+    #   link: https://discord.gg/bridgic
   generator: false
+  version:
+    provider: mike
+
+# Developer-facing validation messages: catch broken links/anchors early without breaking builds
+validation:
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
+  not_found: info
 
 extra_css:
   - stylesheets/extra.css
+  - stylesheets/sticky_navigation.css
+
+copyright: >
+  Copyright &copy; 2025 BitSky Inc. | Built with <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">Material for MkDocs</a>.
 
 extra_javascript:
   - javascripts/mathjax.js

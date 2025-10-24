@@ -1,7 +1,7 @@
 [project]
-name = "docs"
+name = "bridgic-docs"
 version = "0.1.0"
-description = "Add your description here"
+description = "Documentation for Bridgic framework."
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
@@ -13,4 +13,11 @@ dependencies = [
     "mkdocs-git-revision-date-localized-plugin>=1.2.8",
     "mkdocs-git-committers-plugin-2>=2.3.0",
     "mkdocs-minify-plugin>=0.8.0",
+    "mkdocs-jupyter>=0.25.1",
+    "black>=25.9.0",
+    "mkdocs-gen-files>=0.5.0",
+    "mkdocs-literate-nav>=0.6.2",
+    "mkdocs-section-index>=0.3.10",
+    "pyyaml>=6.0.2",
+    "mike>=2.1.3",
 ]

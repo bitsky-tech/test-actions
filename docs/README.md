@@ -1,80 +1,79 @@
-## Bridgic Docs 📚
+# Bridgic Documentation 📚
 
-A lightweight documentation site powered by MkDocs Material and mkdocstrings. It hosts the project guides and API reference for Bridgic. ✨
+A modern, collaborative documentation workflow powered by MkDocs with automated API reference generation.
 
-### Prerequisites ✅
+## Prerequisites 🚀
 
 - Python 3.9+
-- uv (Python package manager) — see `https://github.com/astral-sh/uv`
+- [uv](https://github.com/astral-sh/uv) package manager
 
-All Python dependencies are defined in `pyproject.toml` and installed via `uv sync`.
 
-### Quick Start 🚀
+## Development Workflow 🛠
 
-```bash
-# 1) Install dependencies
-uv sync
+### For general document writer
 
-# 2) Start the dev server (default: 127.0.0.1:8000)
-make serve
+1. Start development server by execute `make serve-doc`.
+2. Edit markdown files in docs/ and view the real-time changes at http://127.0.0.1:8000. 
 
-# Or customize host/port
-make serve HOST=0.0.0.0 PORT=8001
-```
+### For API developer
 
-Open `http://127.0.0.1:8000` in your browser. Live reload is enabled. 🔁
+1. Add docstrings to your Python code.
+2. Run the generation script `make gen-mkdocs-yml`.
+3. Start development server to preview by execute `make serve-doc`.
 
-### Common Commands 🛠️
+### For online deployer
 
-```bash
-# Build the static site into ./site
-make build
+1. Build production-ready site static files by execute `make build-doc`.
+2. Start development server to preview by execute `make serve-doc`.
 
-# Strict build to validate configuration and references
-make check
-
-# Show MkDocs help / version
-make help
-make version
-
-# Clean build artifacts and cache
-make clean
-```
-
-Under the hood, these targets invoke MkDocs via `uv run mkdocs` so you don't need to manually activate a virtual environment. 🧰
-
-### Configuration ⚙️
-
-- Main config: `mkdocs.yml`
-- Theme: Material (`mkdocs-material`)
-- API reference: `mkdocstrings[python]` with `griffe-fieldz`
-- Source paths for API docs point to `../bridgic-core`
-
-You can tweak navigation, theme options, and docstring rendering in `mkdocs.yml`.
-
-### Project Layout 🗂️
+## Project Structure 📁
 
 ```
 docs/
-  ├─ docs/               # Markdown sources (guides, API index, etc.)
-  ├─ site/               # Built static site (generated)
-  ├─ mkdocs.yml          # MkDocs configuration
-  ├─ pyproject.toml      # Docs dependencies
-  └─ Makefile            # Helpful shortcuts (serve/build/check/...)
+├── docs/                   # Content directory
+│   ├── reference/          # Auto-generated API docs (don't edit manually)
+│   └── ...
+├── scripts/                # Documentation tools
+│   ├── mkdocs_template.yml # Template for mkdocs.yml (edit this for config changes)
+│   ├── gen_mkdocs_yml.py   # API documentation generator
+│   └── doc_config.yaml     # Generation configuration
+├── mkdocs.yml              # Generated MkDocs config (auto-generated)
+├── site/                   # Built static site (generated)
+├── pyproject.toml          # Python dependencies
+└── Makefile                # Development commands
 ```
 
-### Tips & Troubleshooting 🧭
+## Configuration ⚙
 
-- Port already in use? Change it with `make serve PORT=8001`.
-- Stale content or layout? Run `make clean && make build`.
-- API pages missing members? Ensure the `../bridgic-core` code is present and importable.
+### Template System
 
-### Deployment 🌐
+The documentation uses a template-based system to avoid merge conflicts:
 
-TODO:
+- **Edit**: `scripts/mkdocs_template.yml` for static configuration
+- **Generated**: `mkdocs.yml` is auto-generated (don't edit manually)
+- **Benefit**: Team members can edit configuration without conflicts
 
-### License 📄
+### API Documentation
 
-This documentation is distributed under the same license as the repository. See the root `LICENSE` file.
+The system automatically generates API documentation from:
+- Numpy style Python docstrings
+- `__all__` exports in `__init__.py` files
+- Module structure and imports
 
+## Deployment 🚀
 
+### Static Site Hosting
+
+```bash
+# Build for production
+make build-doc
+
+# Deploy site/ directory to your hosting service
+# Examples: GitHub Pages, Netlify, Vercel, etc.
+```
+
+### Avoiding Conflicts
+
+- **Don't edit** `mkdocs.yml` directly
+- **Do edit** `scripts/mkdocs_template.yml` for configuration changes
+- **Always run** `make gen-mkdocs-yml` after template changes
