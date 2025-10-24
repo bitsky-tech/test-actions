@@ -31,30 +31,46 @@ jobs:
       cancel-in-progress: true  # Cancel running identical workflows
     
     steps:
-      # Step 1: Checkout code
+      # Step 1: Check if deleted tag matches version pattern
+      - name: Check Tag Pattern
+        id: check-tag
+        run: |
+          if [[ ${{ github.event.ref }} =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "match=true" >> $GITHUB_OUTPUT
+            echo "Tag ${{ github.event.ref }} matches version pattern"
+          else
+            echo "match=false" >> $GITHUB_OUTPUT
+            echo "Tag ${{ github.event.ref }} does not match version pattern (v[0-9]+.[0-9]+.[0-9]+)"
+          fi
+
+      # Step 2: Checkout code
       - name: Checkout repository
+        if: steps.check-tag.outputs.match == 'true'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Fetch complete history, some tools may require this
 
-      # Step 2: Setup Python environment
+      # Step 3: Setup Python environment
       - name: Setup Python
+        if: steps.check-tag.outputs.match == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.9'  # Keep consistent with requirements in pyproject.toml
 
-      # Step 3: Install uv package manager
+      # Step 4: Install uv package manager
       # uv is an extremely fast Python package manager written in Rust
       # Compared to pip, uv has significant advantages in dependency resolution and installation speed
       - name: Install uv
+        if: steps.check-tag.outputs.match == 'true'
         uses: astral-sh/setup-uv@v4
         with:
           version: "latest"  # Use the latest version of uv
           enable-cache: false  # Disable built-in cache to avoid conflicts with multiple uv.lock files
 
-      # Step 4: Cache uv dependencies
+      # Step 5: Cache uv dependencies
       # Caching can significantly reduce build time, especially for large projects
       - name: Cache uv dependencies
+        if: steps.check-tag.outputs.match == 'true'
         uses: actions/cache@v4
         with:
           path: |
@@ -65,22 +81,25 @@ jobs:
             ${{ runner.os }}-docs-uv-
             ${{ runner.os }}-uv-
 
-      # Step 5: Install dependencies and configure Git
+      # Step 6: Install dependencies and configure Git
       - name: Install dependencies and configure Git
+        if: steps.check-tag.outputs.match == 'true'
         run: |
           cd docs
           uv sync
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      # Step 6: Delete docs version with mike
+      # Step 7: Delete docs version with mike
       - name: Delete docs version with mike
+        if: steps.check-tag.outputs.match == 'true'
         run: |
           cd docs
           make delete-doc-version version=${{ github.event.ref }}
 
-      # Step 7: Re-point latest alias to highest remaining tag (if any)
+      # Step 8: Re-point latest alias to highest remaining tag (if any)
       - name: Re-point latest alias to highest remaining tag (if any)
+        if: steps.check-tag.outputs.match == 'true'
         run: |
           set -e
           # Find highest remaining v* tag after deletion
