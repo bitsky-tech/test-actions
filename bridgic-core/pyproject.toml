@@ -1,0 +1,28 @@
+[project]
+name = "bridgic-core"
+version = "0.1.0"
+license = {text = "MIT"}
+classifiers = [
+    "Private :: Do Not Upload",
+    "Programming Language :: Python :: 3",
+]
+description = "Core classes and abstractions of Bridgic, as well as basic implementations for the orchestration framework."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    { name = "Tielei Zhang", email = "zhangtl04@gmail.com" },
+]
+dependencies = []
+
+[dependency-groups]
+dev = []
+
+[tool.pytest.ini_options]
+addopts = ["--tb=short", "--verbose"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+include = ["bridgic/"]

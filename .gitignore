@@ -1,0 +1,11 @@
+__pycache__/
+.vscode/
+logs/
+dist/
+.DS_Store
+docs/site/
+docs/debug.log
+docs/docs/reference
+docs/mkdocs.yml
+.cursor
+.env
