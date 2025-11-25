@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://cicd.bridgic.ai/v0.1.2/</loc>
+        <lastmod>2025-11-25</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://cicd.bridgic.ai/v0.1.2/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://cicd.bridgic.ai/v0.1.2zh/"/>
+    </url>
+    <url>
+        <loc>https://cicd.bridgic.ai/v0.1.2/about/</loc>
+        <lastmod>2025-11-25</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://cicd.bridgic.ai/v0.1.2/about/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://cicd.bridgic.ai/v0.1.2zh/about/"/>
+    </url>
+    <url>
+        <loc>https://cicd.bridgic.ai/v0.1.2/mkdocs_optimization/</loc>
+        <lastmod>2025-11-25</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://cicd.bridgic.ai/v0.1.2/mkdocs_optimization/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://cicd.bridgic.ai/v0.1.2zh/mkdocs_optimization/"/>
+    </url>
+    <url>
+        <loc>https://cicd.bridgic.ai/v0.1.2/test_add_page/</loc>
+        <lastmod>2025-11-25</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://cicd.bridgic.ai/v0.1.2/test_add_page/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://cicd.bridgic.ai/v0.1.2zh/test_add_page/"/>
+    </url>
+    <url>
+        <loc>https://cicd.bridgic.ai/v0.1.2/reference/bridgic-core/bridgic/core/</loc>
+        <lastmod>2025-11-25</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://cicd.bridgic.ai/v0.1.2/reference/bridgic-core/bridgic/core/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://cicd.bridgic.ai/v0.1.2zh/reference/bridgic-core/bridgic/core/"/>
+    </url>
+    <url>
+        <loc>https://cicd.bridgic.ai/v0.1.2/reference/bridgic-core/bridgic/core/agentic/</loc>
+        <lastmod>2025-11-25</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://cicd.bridgic.ai/v0.1.2/reference/bridgic-core/bridgic/core/agentic/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://cicd.bridgic.ai/v0.1.2zh/reference/bridgic-core/bridgic/core/agentic/"/>
+    </url>
+    <url>
+        <loc>https://cicd.bridgic.ai/v0.1.2/zh/</loc>
+        <lastmod>2025-11-25</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://cicd.bridgic.ai/v0.1.2/zh/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://cicd.bridgic.ai/v0.1.2"/>
+    </url>
+    <url>
+        <loc>https://cicd.bridgic.ai/v0.1.2/zh/about/</loc>
+        <lastmod>2025-11-25</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://cicd.bridgic.ai/v0.1.2/zh/about/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://cicd.bridgic.ai/v0.1.2about/"/>
+    </url>
+    <url>
+        <loc>https://cicd.bridgic.ai/v0.1.2/zh/mkdocs_optimization/</loc>
+        <lastmod>2025-11-25</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://cicd.bridgic.ai/v0.1.2/zh/mkdocs_optimization/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://cicd.bridgic.ai/v0.1.2mkdocs_optimization/"/>
+    </url>
+    <url>
+        <loc>https://cicd.bridgic.ai/v0.1.2/zh/test_add_page/</loc>
+        <lastmod>2025-11-25</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://cicd.bridgic.ai/v0.1.2/zh/test_add_page/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://cicd.bridgic.ai/v0.1.2test_add_page/"/>
+    </url>
+    <url>
+        <loc>https://cicd.bridgic.ai/v0.1.2/zh/reference/bridgic-core/bridgic/core/</loc>
+        <lastmod>2025-11-25</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://cicd.bridgic.ai/v0.1.2/zh/reference/bridgic-core/bridgic/core/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://cicd.bridgic.ai/v0.1.2reference/bridgic-core/bridgic/core/"/>
+    </url>
+    <url>
+        <loc>https://cicd.bridgic.ai/v0.1.2/zh/reference/bridgic-core/bridgic/core/agentic/</loc>
+        <lastmod>2025-11-25</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://cicd.bridgic.ai/v0.1.2/zh/reference/bridgic-core/bridgic/core/agentic/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://cicd.bridgic.ai/v0.1.2reference/bridgic-core/bridgic/core/agentic/"/>
+    </url>
+</urlset>
