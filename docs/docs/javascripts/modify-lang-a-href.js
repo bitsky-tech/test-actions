@@ -5,8 +5,8 @@ window.addEventListener('DOMContentLoaded', function() {
   // 3) Pages that already contain a language segment.
   // 4) Root-level pages without explicit versioning.
   const CONFIG = Object.freeze({
-    languages: ['en', 'zh'],
-    langSelector: 'a[hreflang="en"], a[hreflang="zh"]',
+    languages: ['zh'],
+    langSelector: 'a[hreflang="zh"]',
     versionPattern: /^v?\d+(\.\d+)*$/i,
     specialVersions: ['latest'],
   });
