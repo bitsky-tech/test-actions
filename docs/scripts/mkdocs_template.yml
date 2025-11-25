@@ -23,12 +23,8 @@ theme:
   language: en
   features:
     # Navigation
-    # navigation.instant enables client-side navigation for faster page transitions.
-    - navigation.instant
-    # navigation.instant.prefetch preloads likely next pages to reduce perceived latency.
-    - navigation.instant.prefetch
-    # navigation.instant.progress shows a top progress bar on page loads (user feedback).
-    - navigation.instant.progress
+    # navigation.instant* features are disabled because mkdocs-static-i18n's
+    # Material language switcher hooks are incompatible with instant navigation.
     # - navigation.prune  # Keep disabled for now; pruning reduces DOM for huge pages but may complicate anchors.
     - navigation.tabs
     # - navigation.tabs.sticky
@@ -148,6 +144,19 @@ plugins:
         - locale: zh
           name: 中文
           build: true
+          site_name: Bridgic 桥接逻辑与魔法
+          site_description: 将桥梁逻辑、魔法与AI功能相结合
+          copyright: >
+            版权所有 &copy; 2025 BitSky Inc. | 基于 <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">Material for MkDocs</a> 构建。
+          nav_translations:
+            Home: 首页
+            Test Page: 测试页面
+            Test Add Page: 新增示例页
+            Test IPynb: Notebook 示例
+            About: 关于
+            API Reference: API 参考
+            Bridgic-Core: Bridgic 核心
+            agentic: 自治代理
 
 
 markdown_extensions:
